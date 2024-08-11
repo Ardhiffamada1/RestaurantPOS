@@ -1,7 +1,8 @@
 # Dashboard POS Restoran dengan Sistem Pemesanan
 
 Proyek ini adalah **Dashboard POS Restoran** yang modern dan responsif, dirancang untuk memudahkan proses pemesanan di restoran. Menggunakan Next.js dan Tailwind CSS, dashboard ini menawarkan antarmuka yang bersih, profesional, dan dioptimalkan untuk berbagai perangkat.
-
+Demo Usename: admin
+Demo Password : admin123
 ## Fitur
 
 - **Tampilan Menu:**
