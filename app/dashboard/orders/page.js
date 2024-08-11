@@ -1,20 +1,21 @@
 'use client'
 import { useState } from 'react';
+import { useRouter } from 'next/navigation'; // Pastikan menggunakan hook baru untuk routing
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
 const menuCategories = {
   coffee: [
-    { id: 1, name: 'Espresso', price: 3.50, image: 'https://images.unsplash.com/photo-1561746868-2e9a603a2c10?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwyNjg3NjN8MHwxfGFsbHwxfHx8fHx8fHwxNjg5Njg1Mzc1&ixlib=rb-1.2.1&q=80&w=400' },
-    { id: 2, name: 'Latte', price: 4.00, image: 'https://images.unsplash.com/photo-1555685814-4f4d612a8c84?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwyNjg3NjN8MHwxfGFsbHwxfHx8fHx8fHwxNjg5Njg1NzI&ixlib=rb-1.2.1&q=80&w=400' },
-    { id: 3, name: 'Cappuccino', price: 4.50, image: 'https://images.unsplash.com/photo-1603017546000-7f2e4d65cfeb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwyNjg3NjN8MHwxfGFsbHwxfHx8fHx8fHwxNjg5Njg1NzM&ixlib=rb-1.2.1&q=80&w=400' },
-    { id: 4, name: 'Mocha', price: 5.00, image: 'https://images.unsplash.com/photo-1615421148350-f2cf8a46c4a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwyNjg3NjN8MHwxfGFsbHwxfHx8fHx8fHwxNjg5Njg1NzQ&ixlib=rb-1.2.1&q=80&w=400' },
-    { id: 5, name: 'Mocha', price: 5.00, image: 'https://images.unsplash.com/photo-1615421148350-f2cf8a46c4a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwyNjg3NjN8MHwxfGFsbHwxfHx8fHx8fHwxNjg5Njg1NzQ&ixlib=rb-1.2.1&q=80&w=400' },
-    { id: 6, name: 'Mocha', price: 5.00, image: 'https://images.unsplash.com/photo-1615421148350-f2cf8a46c4a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwyNjg3NjN8MHwxfGFsbHwxfHx8fHx8fHwxNjg5Njg1NzQ&ixlib=rb-1.2.1&q=80&w=400' },
-    { id: 7, name: 'Mocha', price: 5.00, image: 'https://images.unsplash.com/photo-1615421148350-f2cf8a46c4a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwyNjg3NjN8MHwxfGFsbHwxfHx8fHx8fHwxNjg5Njg1NzQ&ixlib=rb-1.2.1&q=80&w=400' },
+    { id: 1, name: 'Espresso Machiato', price: 3.50, image: 'https://www.starbucks.co.id/storage/image/temporary/summernote_image_1648178152.jpg' },
+    { id: 2, name: 'Latte', price: 4.00, image: 'https://www.starbucks.co.id/storage/image/temporary/summernote_image_1648177502.jpg' },
+    { id: 3, name: 'Cappuccino', price: 4.50, image: 'https://www.starbucks.co.id/storage/image/temporary/summernote_image_1648177603.jpg' },
+    { id: 4, name: 'Americano', price: 5.00, image: 'https://www.starbucks.co.id/storage/image/temporary/summernote_image_1648177928.jpg' },
+    { id: 5, name: 'Cold Foam', price: 5.00, image: 'https://www.starbucks.co.id/storage/image/temporary/summernote_image_1648472503.jpg' },
+    { id: 6, name: 'Caffe Mocha', price: 5.00, image: 'https://www.starbucks.co.id/storage/image/temporary/summernote_image_1648177734.jpg' },
+    { id: 7, name: 'Cold Brew', price: 5.00, image: 'https://www.starbucks.co.id/storage/image/temporary/summernote_image_1648179326.jpg' },
   ],
   alaCarte: [
-    { id: 5, name: 'Caesar Salad', price: 7.00, image: 'https://images.unsplash.com/photo-1584301855801-235ebfa7b8c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwyNjg3NjN8MHwxfGFsbHwxfHx8fHx8fHwxNjg5Njg1NzU&ixlib=rb-1.2.1&q=80&w=400' },
+    { id: 5, name: 'Smoked Beef Quiche ', price: 7.00, image: 'https://www.starbucks.co.id/storage/image/temporary/summernote_image_1648632884.jpg' },
     { id: 6, name: 'Bruschetta', price: 6.50, image: 'https://images.unsplash.com/photo-1528752601091-65a4e273f5f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwyNjg3NjN8MHwxfGFsbHwxfHx8fHx8fHwxNjg5Njg1NzY&ixlib=rb-1.2.1&q=80&w=400' },
   ],
   mainCourse: [
@@ -28,6 +29,8 @@ export default function Orders() {
   const [activeCategory, setActiveCategory] = useState('coffee');
   const [showModal, setShowModal] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState('');
+
+  const router = useRouter(); // Initialize router hook
 
   const handleAddToOrder = (item) => {
     setSelectedItems((prev) => [...prev, item]);
@@ -77,13 +80,26 @@ export default function Orders() {
   const totalPrice = selectedItems.reduce((sum, item) => sum + item.price, 0).toFixed(2);
 
   return (
-    <div className="p-4 sm:p-6 bg-gray-100 min-h-screen flex flex-col md:flex-row">
-      {/* Menu Grid */}
-      <div className="flex-1 mb-6 md:mb-0 md:mr-6">
-        <header className="flex flex-col mb-6">
-          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800 mb-4">Pesan Makanan</h2>
+    <div className="p-4 sm:p-6 bg-gray-100 min-h-screen flex flex-col">
+      {/* Header */}
+      <div className="flex flex-col mb-6">
+        <button
+          onClick={() => router.push('/dashboard')}
+          className="flex items-center text-green-600 hover:text-green-800 transition-colors duration-200 mb-4"
+        >
+          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Kembali ke Dashboard
+        </button>
+        <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800">Pesan Makanan</h2>
+      </div>
+
+      <div className="flex flex-col md:flex-row flex-1 gap-6">
+        {/* Menu Grid */}
+        <div className="flex-1 mb-6">
           {/* Menu Tabs */}
-          <div className="flex space-x-4 mb-6">
+          <div className="flex flex-wrap gap-4 mb-6">
             {Object.keys(menuCategories).map(category => (
               <button
                 key={category}
@@ -94,69 +110,69 @@ export default function Orders() {
               </button>
             ))}
           </div>
-        </header>
 
-        {/* Menu Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {menuCategories[activeCategory].map(item => (
-            <div key={item.id} className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out flex flex-col items-center">
-              <img src={item.image} alt={item.name} className="w-32 h-32 object-cover mb-4 rounded-full border border-gray-200" />
-              <h3 className="text-lg font-semibold text-gray-800 mb-2 text-center">{item.name}</h3>
-              <p className="text-gray-600 mb-4 text-center">${item.price.toFixed(2)}</p>
+          {/* Menu Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {menuCategories[activeCategory].map(item => (
+              <div key={item.id} className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out flex flex-col items-center">
+                <img src={item.image} alt={item.name} className="w-32 h-32 object-cover mb-4 rounded-full border border-gray-200" />
+                <h3 className="text-lg font-semibold text-gray-800 mb-2">{item.name}</h3>
+                <p className="text-sm text-gray-600 mb-4">${item.price.toFixed(2)}</p>
+                <button
+                  onClick={() => handleAddToOrder(item)}
+                  className="bg-green-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-700 transition-colors duration-200"
+                >
+                  Tambah
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Order Summary */}
+        {selectedItems.length > 0 && (
+          <div className="w-full md:w-1/3 lg:w-1/4 bg-white p-4 rounded-lg shadow-lg flex flex-col overflow-y-auto h-screen mt-14">
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">Ringkasan Pesanan</h2>
+            <table className="w-full border-collapse mb-4">
+              <thead>
+                <tr className="bg-gray-200">
+                  <th className="py-2 px-4 text-gray-800">Menu</th>
+                  <th className="py-2 px-4 text-gray-800">Harga</th>
+                  <th className="py-2 px-4 text-gray-800">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                {selectedItems.map(item => (
+                  <tr key={item.id} className="border-b">
+                    <td className="py-2 px-4 text-gray-800">{item.name}</td>
+                    <td className="py-2 px-4 text-gray-600 text-right">{item.price.toFixed(2)}</td>
+                    <td className="py-2 px-4 text-red-600 text-right">
+                      <button
+                        onClick={() => handleRemoveFromOrder(item.id)}
+                        className="hover:underline"
+                      >
+                        Hapus
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="flex justify-between items-center mt-4 pt-4 border-t">
+              <span className="text-lg font-semibold text-gray-800">Total</span>
+              <span className="text-lg font-bold text-gray-900">${totalPrice}</span>
+            </div>
+            <div className="mt-6">
               <button
-                onClick={() => handleAddToOrder(item)}
+                onClick={handlePlaceOrder}
                 className="bg-green-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-700 transition-colors duration-200 w-full"
               >
-                Tambah ke Pesanan
+                Selesaikan Pesanan
               </button>
             </div>
-          ))}
-        </div>
+          </div>
+        )}
       </div>
-
-      {/* Order Summary */}
-      {selectedItems.length > 0 && (
-        <div className="bg-white p-4 rounded-lg shadow-lg w-full md:w-1/3 lg:w-1/4 mt-6 md:mt-32">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Ringkasan Pesanan</h3>
-          <table className="min-w-full border-collapse">
-            <thead>
-              <tr>
-                <th className="py-2 px-4 text-gray-800">Menu</th>
-                <th className="py-2 px-4 text-gray-800">Harga</th>
-                <th className="py-2 px-4 text-gray-800">Aksi</th>
-              </tr>
-            </thead>
-            <tbody>
-              {selectedItems.map(item => (
-                <tr key={item.id} className="border-b">
-                  <td className="py-2 px-4 text-gray-800">{item.name}</td>
-                  <td className="py-2 px-4 text-gray-600 text-right">${item.price.toFixed(2)}</td>
-                  <td className="py-2 px-4 text-red-600 text-right">
-                    <button
-                      onClick={() => handleRemoveFromOrder(item.id)}
-                      className="hover:underline"
-                    >
-                      Hapus
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className="flex justify-between items-center mt-4 pt-4 border-t">
-            <span className="text-lg font-semibold text-gray-800">Total</span>
-            <span className="text-lg font-bold text-gray-900">${totalPrice}</span>
-          </div>
-          <div className="mt-6">
-            <button
-              onClick={handlePlaceOrder}
-              className="bg-green-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-700 transition-colors duration-200 w-full"
-            >
-              Selesaikan Pesanan
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* Modal */}
       {showModal && (
