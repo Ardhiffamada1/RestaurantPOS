@@ -1,10 +1,38 @@
-'use client'
+'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [username, setUsername] = useState('');
+  const router = useRouter();
+
+  useEffect(() => {
+    // Contoh logika autentikasi sederhana
+    const token = localStorage.getItem('authToken');
+    const storedUsername = localStorage.getItem('username');
+    if (!token || !storedUsername) {
+      router.push('/login'); // Redirect ke halaman login jika belum login
+    } else {
+      setIsAuthenticated(true); // Set isAuthenticated ke true jika login berhasil
+      setUsername(storedUsername); // Set username dari localStorage
+    }
+  }, [router]);
+
+  const getGreeting = () => {
+    const hours = new Date().getHours();
+    if (hours < 12) return 'Selamat pagi';
+    if (hours < 18) return 'Selamat siang';
+    if (hours < 22) return 'Selamat sore';
+    return 'Selamat malam';
+  };
+
+  if (!isAuthenticated) {
+    return null; // Tidak menampilkan apa-apa sampai autentikasi selesai
+  }
 
   return (
     <div className="flex h-screen bg-gray-100">
@@ -20,7 +48,7 @@ export default function Dashboard() {
         </div>
         <nav className="mt-6">
           <ul className="space-y-4 px-6">
-          <span className=''>Selamat siang , "Nama_Shift"</span>
+            <span>{`${getGreeting()}, ${username}`}</span>
             <li>
               <Link href="/dashboard/orders" className="text-gray-600 hover:text-green-600 font-medium">Orders</Link>
             </li>
@@ -66,7 +94,7 @@ export default function Dashboard() {
                 <p className="text-2xl font-bold text-gray-900">$4,567</p>
               </div>
               <svg className="w-12 h-12 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 12l6 6L20 6" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 12l6 6L19 7" />
               </svg>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-lg flex items-center justify-between">
