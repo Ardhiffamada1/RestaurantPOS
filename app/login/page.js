@@ -19,7 +19,7 @@ export default function Login() {
     setLoading(true);
     setError('');
     setSuccess('');
-
+  
     try {
       const res = await fetch('/api/login', {
         method: 'POST',
@@ -28,18 +28,19 @@ export default function Login() {
         },
         body: JSON.stringify({ username, password }),
       });
-
+  
       if (res.ok) {
         const data = await res.json();
         setSuccess('Login successful');
         setUsername('');
         setPassword('');
         
-        // Save token and username in localStorage
+        // Save token, username, and name in localStorage
         localStorage.setItem('authToken', 'your-auth-token'); // Replace with the actual token from the response if needed
-        localStorage.setItem('username', username);
-        
-        // Show the spinner for a short time before redirecting
+        localStorage.setItem('username', data.username);
+        localStorage.setItem('name', data.name); // Make sure 'data.name' exists
+  
+        // Redirect to dashboard after a short delay
         setTimeout(() => {
           setRedirecting(true);
           router.push('/dashboard');
