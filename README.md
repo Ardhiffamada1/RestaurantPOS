@@ -1,27 +1,28 @@
-# Dashboard POS Restoran dengan Sistem Pemesanan
+# Restaurant POS Dashboard with Ordering System
 
-Proyek ini adalah **Dashboard POS Restoran** yang modern dan responsif, dirancang untuk memudahkan proses pemesanan di restoran. Menggunakan Next.js dan Tailwind CSS, dashboard ini menawarkan antarmuka yang bersih, profesional, dan dioptimalkan untuk berbagai perangkat.
-Demo Usename: admin
-Demo Password : admin123
-## Fitur
+This project is a **Restaurant POS Dashboard** that is modern and responsive, designed to simplify the ordering process in restaurants. Built using Next.js and Tailwind CSS, this dashboard offers a clean, professional interface that is optimized for various devices.  
+**Demo Username:** admin  
+**Demo Password:** admin123
 
-- **Tampilan Menu:**
-  - Grid layout untuk menampilkan item menu dengan gambar, nama, dan harga.
-  - Kemampuan untuk menambahkan item ke keranjang pesanan.
+## Features
 
-- **Keranjang Pesanan:**
-  - Ikon keranjang yang tetap di pojok kanan atas layar.
-  - Tampilan keranjang yang meluncur dari sisi kanan dengan detail item dan total harga.
-  - Opsi untuk membersihkan keranjang atau menyelesaikan pesanan.
+- **Menu Display:**
+  - Grid layout to showcase menu items with images, names, and prices.
+  - Ability to add items to the order cart.
 
-- **Desain Responsif:**
-  - Layout yang menyesuaikan dengan berbagai ukuran layar, dari desktop hingga perangkat mobile seperti tablet dan smartphone.
+- **Order Cart:**
+  - A cart icon that remains in the top right corner of the screen.
+  - A sliding cart view from the right side with item details and total price.
+  - Options to clear the cart or complete the order.
 
-- **Antarmuka Pengguna yang Intuitif:**
-  - Desain yang bersih dan profesional, terinspirasi dari antarmuka restoran dan e-commerce populer.
+- **Responsive Design:**
+  - Layout adjusts to various screen sizes, from desktops to mobile devices like tablets and smartphones.
 
-## Teknologi yang Digunakan
+- **Intuitive User Interface:**
+  - A clean and professional design, inspired by popular restaurant and e-commerce interfaces.
 
-- **Next.js:** Framework React untuk rendering sisi server dan pembuatan situs statis.
-- **Tailwind CSS:** Framework CSS berbasis utilitas untuk pengembangan UI yang cepat.
-- **React Hooks:** Untuk mengelola state dan efek samping.
+## Technologies Used
+
+- **Next.js:** A React framework for server-side rendering and static site generation.
+- **Tailwind CSS:** A utility-first CSS framework for rapid UI development.
+- **React Hooks:** To manage state and side effects.
