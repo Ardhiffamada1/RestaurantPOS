@@ -90,9 +90,9 @@ export default function Orders() {
           <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
           </svg>
-          Kembali ke Dashboard
+          Back to Dashboard
         </button>
-        <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800">Pesan Makanan</h2>
+        <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800">Orders Food</h2>
       </div>
 
       <div className="flex flex-col md:flex-row flex-1 gap-6">
@@ -122,7 +122,7 @@ export default function Orders() {
                   onClick={() => handleAddToOrder(item)}
                   className="bg-green-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-700 transition-colors duration-200"
                 >
-                  Tambah
+                  Add
                 </button>
               </div>
             ))}
@@ -137,8 +137,8 @@ export default function Orders() {
               <thead>
                 <tr className="bg-gray-200">
                   <th className="py-2 px-4 text-gray-800">Menu</th>
-                  <th className="py-2 px-4 text-gray-800">Harga</th>
-                  <th className="py-2 px-4 text-gray-800">Aksi</th>
+                  <th className="py-2 px-4 text-gray-800">Price</th>
+                  <th className="py-2 px-4 text-gray-800">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -151,7 +151,7 @@ export default function Orders() {
                         onClick={() => handleRemoveFromOrder(item.id)}
                         className="hover:underline"
                       >
-                        Hapus
+                        Remove
                       </button>
                     </td>
                   </tr>
@@ -167,7 +167,7 @@ export default function Orders() {
                 onClick={handlePlaceOrder}
                 className="bg-green-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-700 transition-colors duration-200 w-full"
               >
-                Selesaikan Pesanan
+                Finish Order
               </button>
             </div>
           </div>
@@ -178,8 +178,8 @@ export default function Orders() {
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Selesaikan Pembayaran</h3>
-            <p className="text-gray-600 mb-4">Silakan pilih metode pembayaran:</p>
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Payment Confirmation</h3>
+            <p className="text-gray-600 mb-4">Payment Method :</p>
             <div className="space-y-4 mb-4">
               <button
                 onClick={() => handlePaymentMethodChange('Cash')}
@@ -199,13 +199,13 @@ export default function Orders() {
                 onClick={handleConfirmOrder}
                 className="bg-green-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-700 transition-colors duration-200"
               >
-                Konfirmasi
+                Confirm
               </button>
               <button
                 onClick={handleCancelOrder}
                 className="bg-gray-300 text-gray-800 px-4 py-2 rounded-md shadow-md hover:bg-gray-400 transition-colors duration-200"
               >
-                Batal
+                Cancel
               </button>
             </div>
           </div>

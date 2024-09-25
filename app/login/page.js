@@ -35,16 +35,13 @@ export default function Login() {
         setUsername('');
         setPassword('');
         
-        // Save token, username, and name in localStorage
-        localStorage.setItem('authToken', 'your-auth-token'); // Replace with the actual token from the response if needed
+        localStorage.setItem('authToken', 'your-auth-token');
         localStorage.setItem('username', data.username);
-        localStorage.setItem('name', data.name); // Make sure 'data.name' exists
-  
-        // Redirect to dashboard after a short delay
+        localStorage.setItem('name', data.name);
         setTimeout(() => {
           setRedirecting(true);
           router.push('/dashboard');
-        }, 1000); // Adjust the delay as needed
+        }, 1000);
       } else {
         const data = await res.json();
         setError(data.message || 'Login failed');

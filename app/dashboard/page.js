@@ -9,17 +9,16 @@ export default function Dashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState(''); 
   const [name, setName] = useState(''); 
-  const [isDarkMode, setIsDarkMode] = useState(false); // State untuk dark mode
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    // Cek token dan data lain dari localStorage
     const token = localStorage.getItem('authToken');
     const storedUsername = localStorage.getItem('username');
     const storedName = localStorage.getItem('name'); 
-    const storedTheme = localStorage.getItem('theme'); // Ambil tema yang disimpan
+    const storedTheme = localStorage.getItem('theme')
     if (!token || !storedUsername || !storedName) {
-      router.push('/login'); // Redirect ke halaman login jika belum login
+      router.push('/login');
     } else {
       setIsAuthenticated(true);
       setUsername(storedUsername);
@@ -44,20 +43,19 @@ export default function Dashboard() {
   };
 
   if (!isAuthenticated) {
-    return null; // Tidak menampilkan apa-apa sampai autentikasi selesai
+    return null;
   }
 
-  // Function untuk mengatur greeting berdasarkan waktu
   const getGreeting = () => {
     const currentHour = new Date().getHours();
     if (currentHour < 12) {
-      return { greeting: 'Selamat Pagi', icon: '☀️' };
+      return { greeting: 'Good Morning', icon: '☀️' };
     } else if (currentHour < 18) {
-      return { greeting: 'Selamat Siang', icon: '🌞' };
+      return { greeting: 'Good Evening', icon: '🌞' };
     } else if (currentHour < 21) {
-      return { greeting: 'Selamat Sore', icon: '🌇' };
+      return { greeting: 'Good Afternoon', icon: '🌇' };
     } else {
-      return { greeting: 'Selamat Malam', icon: '🌙' };
+      return { greeting: 'Good Night', icon: '🌙' };
     }
   };
 
@@ -119,7 +117,7 @@ export default function Dashboard() {
             <div className={`p-6 rounded-lg shadow-lg flex items-center justify-between ${isDarkMode ? 'bg-gray-700' : 'bg-white'}`}>
               <div>
                 <h3 className="text-lg font-semibold">Total Orders</h3>
-                <p className="text-2xl font-bold">123</p>
+                <p className="text-2xl font-bold"> - </p>
               </div>
               <svg className="w-12 h-12 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h4v11H3zm6-4h4v15H9zm6-6h4v21h-4z" />
@@ -128,7 +126,7 @@ export default function Dashboard() {
             <div className={`p-6 rounded-lg shadow-lg flex items-center justify-between ${isDarkMode ? 'bg-gray-700' : 'bg-white'}`}>
               <div>
                 <h3 className="text-lg font-semibold">Total Sales</h3>
-                <p className="text-2xl font-bold">$4,567</p>
+                <p className="text-2xl font-bold"> - </p>
               </div>
               <svg className="w-12 h-12 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 12l6 6L20 6" />
@@ -137,7 +135,7 @@ export default function Dashboard() {
             <div className={`p-6 rounded-lg shadow-lg flex items-center justify-between ${isDarkMode ? 'bg-gray-700' : 'bg-white'}`}>
               <div>
                 <h3 className="text-lg font-semibold">Items in Stock</h3>
-                <p className="text-2xl font-bold">45</p>
+                <p className="text-2xl font-bold"> - </p>
               </div>
               <svg className="w-12 h-12 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />

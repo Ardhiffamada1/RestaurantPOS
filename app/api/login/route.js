@@ -2,13 +2,12 @@ export async function POST(req) {
   try {
     const { username, password } = await req.json();
 
-    // Simple authentication logic
     if (username === 'admin' && password === 'admin123') {
       return new Response(JSON.stringify({ 
         message: 'Login successful', 
         token: 'your-auth-token', 
         username: 'admin', 
-        name: 'John Doe' // Replace with actual name
+        name: 'John Doe'
       }), {
         status: 200,
         headers: { 'Content-Type': 'application/json' },
